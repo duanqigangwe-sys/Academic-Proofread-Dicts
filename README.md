@@ -24,7 +24,8 @@ https://raw.githubusercontent.com/duanqigangwe-sys/Academic-Proofread-Dicts/main
 | `names_lexicon-1.txt` / `names_lexicon-2.txt` | 外国人名规范译名大辞典（合计约 60 万条） | 同上，RAG 按需检索；同时供「回译术语锚点」做规范译名比对 |
 | `banned_words.txt` | 出版社禁限词库 | **三校 · 合规导向引擎**逐词确定性扫描全稿（零大模型成本） |
 | `THUOCL_medical.txt` / `THUOCL_law.txt` / `THUOCL_caijing.txt` / `THUOCL_IT.txt` | 清华 THUOCL 开源领域词库（格式 `词⇥词频`） | **领域术语白名单**：界面按学科勾选后 RAG 按需检索，只把切片中真实出现的领域规范词形注入 Prompt，防止专业术语被误判为错别字而误改（仅收录 3~12 字中文词条） |
-| 其余 `THUOCL_*.txt`（成语/地名/历史名人等） | 同上格式 | 当前智能体**未直接调用**，保留作扩展储备（如成语误用确定性检查） |
+| `THUOCL_chengyu.txt` | 清华 THUOCL 成语库（格式 `词⇥词频`） | **成语误写确定性检查**（三校流水线 · 一校物理差错）：四字窗口与常见成语一字之差且差异字同音 → 报疑似误写（如"一如继往→一如既往"）；词频阈值/唯一候选/同音门槛多重防误报 |
+| 其余 `THUOCL_*.txt`（地名/历史名人/诗词等） | 同上格式 | 当前智能体**未直接调用**，保留作扩展储备 |
 
 ## 三、格式规范
 
