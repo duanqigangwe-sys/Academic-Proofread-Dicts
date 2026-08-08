@@ -23,7 +23,8 @@ https://raw.githubusercontent.com/duanqigangwe-sys/Academic-Proofread-Dicts/main
 | `places_lexicon.txt` | 涉外地名规范译名大辞典（约 17 万条） | **RAG 按需检索**：只把切片中真实出现的词条注入 Prompt |
 | `names_lexicon-1.txt` / `names_lexicon-2.txt` | 外国人名规范译名大辞典（合计约 60 万条） | 同上，RAG 按需检索；同时供「回译术语锚点」做规范译名比对 |
 | `banned_words.txt` | 出版社禁限词库 | **三校 · 合规导向引擎**逐词确定性扫描全稿（零大模型成本） |
-| `THUOCL_*.txt` | 清华开源领域词库（IT/医学/法律/成语等，格式 `词⇥词频`） | 当前智能体**未直接调用**，保留作领域术语扩展储备 |
+| `THUOCL_medical.txt` / `THUOCL_law.txt` / `THUOCL_caijing.txt` / `THUOCL_IT.txt` | 清华 THUOCL 开源领域词库（格式 `词⇥词频`） | **领域术语白名单**：界面按学科勾选后 RAG 按需检索，只把切片中真实出现的领域规范词形注入 Prompt，防止专业术语被误判为错别字而误改（仅收录 3~12 字中文词条） |
+| 其余 `THUOCL_*.txt`（成语/地名/历史名人等） | 同上格式 | 当前智能体**未直接调用**，保留作扩展储备（如成语误用确定性检查） |
 
 ## 三、格式规范
 
