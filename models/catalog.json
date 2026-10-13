@@ -1,0 +1,147 @@
+﻿{
+  "kind": "pub-proofer.model-catalog",
+  "version": 1,
+  "generatedAt": "2026-10-13",
+  "note": "妯″瀷鍚嶅綍锛氬巶鍟?鈫?鍨嬪彿 鈫?妗ｄ綅 / 鐘舵€併€傚悜瀵肩殑鍘傚晢棰勮銆佸嚭鍘傜己鐪佹ā鍨嬨€佽缃〉涓嬫媺鍊欓€夈€佹櫤鑳介厤缃殑鎸夊娆℃帹鑽愩€乻etup:cn 鐨勫垎瀹℃鍒嗘淳涓庝唬鐞嗙櫧鍚嶅崟鍏ㄩ儴鐢辨湰鏂囦欢娲剧敓銆傝繙绋嬪悕褰曪紙璇嶅簱鏍?models/catalog.json 鎴栨湇鍔″櫒 /pack.json 瑕嗙洊锛夊彧鑳芥洿鏂板凡鐭ュ巶鍟嗙殑 models 涓庣姸鎬侊紝baseUrl / keyHint 浠ユ湰鏂囦欢涓哄噯銆佷笉鎺ュ彈杩滅▼瑕嗙洊銆傛瘡鍘傚晢鐨?roleDefaults 鏄?resolveDispatch 鐨勫揩鐓э紙tests/modelCatalog.test.ts 鏍￠獙鍚屾锛夛紝渚涗笉璺?TS 鐨?setup:cn 鐩存帴璇诲彇銆備笅绾跨殑鍨嬪彿鏀?status=deprecated 骞跺～ replacedBy锛屼笉鍒犺銆傛帓鐗堢敱 npm run catalog:sync 缁熶竴锛堟瘡涓瀷鍙蜂竴琛岋級锛沗_scan` 閿槸瀵嗛挜鎵弿鍣ㄧ殑鏀捐鏍囪鈥斺€斿叕寮€鐨勬ā鍨嬪悕 / 绔偣瀛楃涓插彲鑳戒笌鏌愬彴鏈哄櫒閰嶇疆鐨勭幆澧冨彉閲忓€肩浉鍚岋紝涓嶅惈浠讳綍绉樺瘑銆?,
+  "tiers": {
+    "fast": "蹇€熺粡娴庯細涓€瀹℃満姊扮瓫鏌ャ€侀鎵弿",
+    "balanced": "鍧囪　锛氫簩瀹″榻愩€佺粓瀹′徊瑁?,
+    "strong": "鏃楄埌锛堥潪鎬濈淮閾撅級锛氫笁瀹″ぇ浼楃 / 缁堝鍙︿竴娆?,
+    "reasoning": "娣卞害鎺ㄧ悊锛堟€濈淮閾撅級锛氫笁瀹″鏈?/ 璇戣憲 / 棰嗗煙瀵嗛泦绋?,
+    "long": "闀夸笂涓嬫枃锛氳秴闀垮垏鐗囧厹搴?
+  },
+  "providers": [
+    {
+      "id": "deepseek",
+      "label": "DeepSeek",
+      "cn": true,
+      "baseUrl": "https://api.deepseek.com/v1",
+      "keyHint": "platform.deepseek.com 鈫?API keys",
+      "models": [
+        {"id":"deepseek-chat","label":"DeepSeek V3","tier":"balanced","status":"active"},
+        {"id":"deepseek-reasoner","label":"DeepSeek R1 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"}
+      ],
+      "roleDefaults": {"scout":"deepseek-chat","redline":"deepseek-chat","chief":"deepseek-reasoner","editor":"deepseek-reasoner"}
+    },
+    {
+      "id": "dashscope",
+      "label": "闃块噷浜戠櫨鐐硷紙閫氫箟锛?,
+      "cn": true,
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "keyHint": "bailian.console.aliyun.com 鈫?API-KEY",
+      "models": [
+        {"id":"qwen-turbo","label":"閫氫箟缁忔祹","tier":"fast","status":"active"},
+        {"id":"qwen-plus","label":"閫氫箟鍧囪　","tier":"balanced","status":"active"},
+        {"id":"qwen-max","label":"閫氫箟鏃楄埌","tier":"strong","status":"active"},
+        {"id":"qwq-plus","label":"閫氫箟 QwQ 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"},
+        {"id":"qwen-long","label":"閫氫箟闀挎枃鏈?,"tier":"long","status":"active"}
+      ],
+      "roleDefaults": {"scout":"qwen-turbo","redline":"qwen-plus","chief":"qwq-plus","editor":"qwen-max"}
+    },
+    {
+      "id": "zhipu",
+      "label": "鏅鸿氨 GLM",
+      "cn": true,
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+      "keyHint": "open.bigmodel.cn 鈫?API Keys",
+      "models": [
+        {"id":"glm-4.5-flash","label":"GLM-4.5 缁忔祹","tier":"fast","status":"active"},
+        {"id":"glm-4.5-air","label":"GLM-4.5 Air 鍧囪　","tier":"balanced","status":"active"},
+        {"id":"glm-4.5","label":"GLM-4.5 鏃楄埌锛堝惈鎬濈淮閾撅級","tier":"reasoning","status":"active"},
+        {"id":"glm-4-plus","label":"GLM-4 Plus 鏃楄埌","tier":"strong","status":"supplemental"},
+        {"id":"glm-4-flash","label":"GLM-4 缁忔祹","tier":"fast","status":"supplemental"},
+        {"id":"glm-4-long","label":"GLM-4 闀挎枃鏈?,"tier":"long","status":"supplemental"}
+      ],
+      "roleDefaults": {"scout":"glm-4.5-flash","redline":"glm-4.5-air","chief":"glm-4.5","editor":"glm-4-plus"}
+    },
+    {
+      "id": "moonshot",
+      "label": "Moonshot锛圞imi锛?,
+      "cn": true,
+      "baseUrl": "https://api.moonshot.cn/v1",
+      "keyHint": "platform.moonshot.cn 鈫?API Key",
+      "models": [
+        {"id":"moonshot-v1-8k","label":"Kimi v1 8k 缁忔祹","tier":"fast","status":"active"},
+        {"id":"kimi-k2-turbo-preview","label":"Kimi K2 Turbo","tier":"balanced","status":"active"},
+        {"id":"kimi-k2-0905-preview","label":"Kimi K2 鏃楄埌","tier":"strong","status":"active"},
+        {"id":"kimi-thinking-preview","label":"Kimi 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"},
+        {"id":"moonshot-v1-128k","label":"Kimi v1 128k 闀挎枃鏈?,"tier":"long","status":"active"},
+        {"id":"kimi-k2-0711-preview","label":"Kimi K2锛?711锛?,"tier":"strong","status":"deprecated","replacedBy":"kimi-k2-0905-preview"}
+      ],
+      "roleDefaults": {"scout":"moonshot-v1-8k","redline":"kimi-k2-turbo-preview","chief":"kimi-thinking-preview","editor":"kimi-k2-0905-preview"}
+    },
+    {
+      "id": "volces",
+      "label": "鐏北鏂硅垷锛堣眴鍖咃級",
+      "cn": true,
+      "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+      "keyHint": "console.volcengine.com 鈫?鏂硅垷 鈫?API Key锛堟ā鍨嬪悕濉?Model ID 鎴栨帴鍏ョ偣 ID锛?,
+      "manualHint": "鏂硅垷鐨勬ā鍨嬪悕鏄帶鍒跺彴閲岀殑 Model ID锛堝 doubao-seed-1-6-250615锛夋垨鑷缓鎺ュ叆鐐?ID锛坋p-鈥︼級锛岃处鍙峰紑閫氱殑鍨嬪彿鎵嶅彲鐢紱涓嬫柟鍊欓€夊彧浣滃弬鑰冿紝浠ユ帶鍒跺彴涓哄噯",
+      "models": [
+        {"id":"doubao-seed-1-6-flash-250615","label":"璞嗗寘 Seed 1.6 Flash","tier":"fast","status":"supplemental"},
+        {"id":"doubao-seed-1-6-250615","label":"璞嗗寘 Seed 1.6","tier":"balanced","status":"supplemental"},
+        {"id":"doubao-seed-1-6-thinking-250615","label":"璞嗗寘 Seed 1.6 Thinking","tier":"reasoning","status":"supplemental"}
+      ],
+      "roleDefaults": {"scout":"doubao-seed-1-6-flash-250615","redline":"doubao-seed-1-6-250615","chief":"doubao-seed-1-6-thinking-250615","editor":"doubao-seed-1-6-thinking-250615"}
+    },
+    {
+      "id": "siliconflow",
+      "label": "纭呭熀娴佸姩",
+      "cn": true,
+      "baseUrl": "https://api.siliconflow.cn/v1", "_scan": "pragma: allowlist secret",
+      "keyHint": "cloud.siliconflow.cn 鈫?API 瀵嗛挜",
+      "models": [
+        {"id":"Qwen/Qwen2.5-7B-Instruct","label":"Qwen2.5 7B 缁忔祹","tier":"fast","status":"active"},
+        {"id":"deepseek-ai/DeepSeek-V3","label":"DeepSeek V3","tier":"balanced","status":"active","_scan":"pragma: allowlist secret"},
+        {"id":"Qwen/Qwen2.5-72B-Instruct","label":"Qwen2.5 72B","tier":"strong","status":"active"},
+        {"id":"deepseek-ai/DeepSeek-R1","label":"DeepSeek R1 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"}
+      ],
+      "roleDefaults": {"scout":"Qwen/Qwen2.5-7B-Instruct","redline":"deepseek-ai/DeepSeek-V3","chief":"deepseek-ai/DeepSeek-R1","editor":"Qwen/Qwen2.5-72B-Instruct","_scan":"pragma: allowlist secret"}
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "cn": false,
+      "baseUrl": "https://api.openai.com/v1",
+      "keyHint": "platform.openai.com 鈫?API keys",
+      "models": [
+        {"id":"gpt-4o-mini","label":"GPT-4o mini 缁忔祹","tier":"fast","status":"active"},
+        {"id":"gpt-4.1-mini","label":"GPT-4.1 mini","tier":"fast","status":"active"},
+        {"id":"gpt-4o","label":"GPT-4o 鍧囪　","tier":"balanced","status":"active"},
+        {"id":"gpt-4.1","label":"GPT-4.1 鏃楄埌","tier":"strong","status":"active"},
+        {"id":"gpt-5","label":"GPT-5","tier":"strong","status":"active"},
+        {"id":"o3","label":"o3 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"},
+        {"id":"o4-mini","label":"o4-mini 蹇€熸帹鐞?,"tier":"reasoning","status":"active"}
+      ],
+      "roleDefaults": {"scout":"gpt-4o-mini","redline":"gpt-4o","chief":"o3","editor":"gpt-4.1"}
+    },
+    {
+      "id": "openrouter",
+      "label": "OpenRouter锛堣仛鍚堬級",
+      "cn": false,
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "keyHint": "openrouter.ai 鈫?Keys",
+      "models": [
+        {"id":"google/gemini-2.5-flash","label":"Gemini 2.5 Flash 缁忔祹","tier":"fast","status":"active"},
+        {"id":"openai/gpt-4o-mini","label":"GPT-4o mini 缁忔祹","tier":"fast","status":"active"},
+        {"id":"deepseek/deepseek-chat","label":"DeepSeek V3","tier":"balanced","status":"active"},
+        {"id":"openai/gpt-4o","label":"GPT-4o 鍧囪　","tier":"balanced","status":"active"},
+        {"id":"anthropic/claude-sonnet-4.5","label":"Claude Sonnet 4.5 鏃楄埌","tier":"strong","status":"active"},
+        {"id":"google/gemini-2.5-pro","label":"Gemini 2.5 Pro 鏃楄埌","tier":"strong","status":"active"},
+        {"id":"deepseek/deepseek-reasoner","label":"DeepSeek R1 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"},
+        {"id":"openai/o3","label":"o3 娣卞害鎺ㄧ悊","tier":"reasoning","status":"active"}
+      ],
+      "roleDefaults": {"scout":"google/gemini-2.5-flash","redline":"deepseek/deepseek-chat","chief":"deepseek/deepseek-reasoner","editor":"openai/gpt-4o"}
+    },
+    {
+      "id": "local",
+      "label": "鍐呯綉鑷缓锛坴LLM / Ollama锛?,
+      "cn": true,
+      "baseUrl": "",
+      "keyHint": "Ollama 涓嶆牎楠?Key锛屼换濉?8 浣嶄互涓婏紱鍦板潃濡?http://127.0.0.1:11434/v1",
+      "manualHint": "鑷缓鏈嶅姟鐨勬ā鍨嬪悕浠?GET /models 杩斿洖涓哄噯锛圤llama / vLLM 閮芥敮鎸侊級锛屽～ Key 鍚庤嚜鍔ㄦ媺鍙?,
+      "models": [],
+      "roleDefaults": {"scout":"","redline":"","chief":"","editor":""}
+    }
+  ]
+}
