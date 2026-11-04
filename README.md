@@ -1,6 +1,8 @@
 # Academic-Proofread-Dicts · 出版审校智能体云端知识库
 
-本仓库是「[出版审校智能体](https://github.com/duanqigangwe-sys/my-smart-agent)」的云端知识库：审校规范、人名/地名大辞典与禁限词库集中在此维护，与应用代码解耦。**编辑只需修改本仓库的文本文件并提交，所有用户下一次审校即自动生效**，无需重新部署应用。
+本仓库是「[出版审校智能体](https://github.com/duanqigangwe-sys/my-smart-agent)」的**公开**云端知识库：审校规范与通用词库集中在此维护，与应用代码解耦。**编辑只需修改本仓库的文本文件并提交，所有用户下一次审校即自动生效**，无需重新部署应用。
+
+涉密/授权受限的禁限词与译名大辞典表放在私有仓 **Press-Private-Dicts**，不经本仓分发。
 
 ## 一、接入方式
 
@@ -20,8 +22,7 @@ https://raw.githubusercontent.com/duanqigangwe-sys/Academic-Proofread-Dicts/main
 | `lexicon(常见错别字库).txt.txt` | 高频错别字与异形词辨析 | **整文注入 Prompt**（一审格式初校 / 三审领用） |
 | `format（排版与标点规范）.txt.txt` | GB/T 15834 标点、GB/T 15835 数字用法 | 整文注入为兜底；应用内置同源的结构化规则库（`src/data/formatRules.json`）按切片**按需检索** |
 | `references（参考文献著录规范）.txt.txt` | GB/T 7714 参考文献著录规则 | **整文注入 Prompt**（一审 / 三审领用） |
-| `places_lexicon.txt` | 涉外地名规范译名大辞典（约 17 万条） | **RAG 按需检索**：只把切片中真实出现的词条注入 Prompt |
-| `names_lexicon-1.txt` / `names_lexicon-2.txt` | 外国人名规范译名大辞典（合计约 60 万条） | 同上，RAG 按需检索；同时供「回译术语锚点」做规范译名比对 |
+| ~~`places_lexicon.txt`~~ / ~~`names_lexicon-1/2.txt`~~ | 涉外地名 / 外国人名规范译名大辞典表——**已撤出本仓**（2026-11-04）：仅保留在私有仓 Press-Private-Dicts，凭授权经私有端点下发 | 本仓不分发；应用「涉外地名 / 外国人名」勾选项走私有端点。**译名以纸本为准、人工核对** |
 | `banned_words.txt` | 出版社禁限词库 | **三校 · 合规导向引擎**逐词确定性扫描全稿（零大模型成本） |
 | `THUOCL_medical.txt` / `THUOCL_law.txt` / `THUOCL_caijing.txt` / `THUOCL_IT.txt` | 清华 THUOCL 开源领域词库（格式 `词⇥词频`） | **领域术语白名单**：界面按学科勾选后 RAG 按需检索，只把切片中真实出现的领域规范词形注入 Prompt，防止专业术语被误判为错别字而误改（仅收录 3~12 字中文词条） |
 | `THUOCL_chengyu.txt` | 清华 THUOCL 成语库（格式 `词⇥词频`） | **成语误写确定性检查**（三校流水线 · 一校物理差错）：四字窗口与常见成语一字之差且差异字同音 → 报疑似误写（如"一如继往→一如既往"）；词频阈值/唯一候选/同音门槛多重防误报 |
@@ -33,17 +34,9 @@ https://raw.githubusercontent.com/duanqigangwe-sys/Academic-Proofread-Dicts/main
 
 纯文本，UTF-8。会被整文注入大模型 Prompt，请保持**条款式、短句、无装饰排版**，控制篇幅（建议单文件 ≤ 8 KB），避免与建议输出格式冲突的示例 JSON。
 
-### 2. 译名词典（places / names）
+### 2. 译名词典（已迁私有仓）
 
-每行一条，**制表符（Tab）分列**：
-
-```
-外文名 ⇥ 国别/语种 ⇥ 规范中译名 ⇥ 备注（可选）
-```
-
-- 兼容带行号首列的导出格式（`序号 ⇥ 外文名 ⇥ 国别 ⇥ 中译名`），加载器自动剥离行号；
-- 章节标题行、无译名的分节行会被自动过滤；
-- **编码**：推荐 UTF-8；应用加载器可自动识别 UTF-16 LE/BE（现有《世界人名/地名翻译大辞典》电子版即为 UTF-16，可直接使用）。若追求下载速度，可将 UTF-16 文件转为 UTF-8，体积约减半：`iconv -f UTF-16LE -t UTF-8 in.txt > out.txt`。
+`places_lexicon.txt`、`names_lexicon-1.txt`、`names_lexicon-2.txt` **不在本仓维护**。格式仍为每行一条、制表符分列（外文名 ⇥ 国别/语种 ⇥ 规范中译名 ⇥ 备注），仅由有权限者在 **Press-Private-Dicts** 更新。编码推荐 UTF-8；应用加载器可识别 UTF-16 LE/BE。译名一律**以纸本为准、人工核对**。
 
 ### 3. 禁限词库（banned_words.txt）
 
@@ -66,4 +59,4 @@ https://raw.githubusercontent.com/duanqigangwe-sys/Academic-Proofread-Dicts/main
 1. 所有文件一律 **UTF-8**（无 BOM 优先）；换行 LF/CRLF 均可。
 2. 词典列间只用 **Tab**，不要用空格或全角空格对齐。
 3. 文件名保持不变（应用按文件名拉取）；新增词典请同步在应用仓库 `src/lib/rules.ts` 的 `RULE_FILES` 中登记。
-4. 大文件（>50 MB）建议拆分为多个分卷（参照 `names_lexicon-1/2.txt`），应用端会自动合并索引。
+4. 大文件（>50 MB）建议拆分为多个分卷，应用端会自动合并索引；译名大辞典分卷只放私有仓。
